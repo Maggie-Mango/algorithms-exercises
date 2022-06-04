@@ -10,10 +10,13 @@
   index's. Continue looping through until all values are in ascending order
 */
 
+//spatial: constant
+//time: n squared
 function bubbleSort(nums) {
   // code goes here
   let swapped = false;
-
+  do {
+    swapped = false;
     for (let i = 0; i < nums.length; i++) {
       let temp = nums[i]
       if (temp > nums[i + 1]) {
@@ -23,7 +26,7 @@ function bubbleSort(nums) {
         swapped = true;
       }
     }
-
+  } while (swapped)
   return nums
 }
 
