@@ -7,8 +7,33 @@
 */
 
 const mergeSort = (nums) => {
-  // code goes here
+  //base case
+  if (nums.length === 1 || nums.length === 0) {
+    return nums
+  }
+  //break into two smaller arrays and call mergesort on them
+  const length = nums.length
+  const middle = Math.floor(length / 2)
+  const leftArr = nums.slice(0, middle)
+  const rightArr = nums.slice(middle)
+
+  return merge(mergeSort(leftArr), mergeSort(rightArr))
+
 };
+
+
+//takes 2 sorted arrays and returns the sorted version
+const merge = (arr1, arr2) => {
+  let mergedArr = []
+  while (arr1 && arr2) {
+    if (arr1[0] <= arr2[0]) {
+      mergedArr.push(arr1.shift())
+    } else {
+      mergedArr.push(arr2.shift())
+    }
+  }
+  return mergedArr.concat(arr1, arr2)
+}
 
 // unit tests
 // do not modify the below code
