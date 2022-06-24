@@ -8,7 +8,19 @@ function linearSearch(id, array) {
 }
 
 function binarySearch(id, array) {
-  // code goes here
+
+  let left = 0
+  let right = array.length - 1;
+  while (left <= right) {
+    let mid = Math.floor( (left + right) / 2);
+    if (array[mid] < id) {
+      left = mid + 1;
+    } else if (array[mid] > id) {
+      right = mid - 1;
+    } else {
+      return mid
+    }
+  }
 }
 
 // unit tests

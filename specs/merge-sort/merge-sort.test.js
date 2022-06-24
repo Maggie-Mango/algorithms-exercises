@@ -12,12 +12,14 @@ const mergeSort = (nums) => {
     return nums
   }
   //break into two smaller arrays and call mergesort on them
-  const length = nums.length
+  const length = nums.length;
   const middle = Math.floor(length / 2)
   const leftArr = nums.slice(0, middle)
   const rightArr = nums.slice(middle)
 
-  return merge(mergeSort(leftArr), mergeSort(rightArr))
+  const sortedLeft = mergeSort(leftArr)
+  const sortedRight = mergeSort(rightArr)
+  return merge(sortedLeft, sortedRight)
 
 };
 

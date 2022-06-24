@@ -3,19 +3,68 @@
   Implement a radix sort in a function called radixSort.
 
   You'll probably need several functions
-  
+
   You can implement it using a binary or decimal based bucketing but I'd recommend the decimal based buckets because
   it ends up being a lot more simple to implement.
 
 */
 
+//number: 1391, place: 0, longestNumber in set:4
+//returns 1
+
+function getDigit(number, place, longestNumber) {
+  const string = number.toString();
+  const size = string.length;
+
+  const mod = longestNumber - size;
+  return string[place - mod] || 0;
+}
+
+//returns 4 (using dataset)
+function getLongestNumber(array) {
+  let longest = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    const currentLength = array[i].toString().length;
+    longest = currentLength > longest ? currentLength : longest;
+  }
+
+  return longest;
+}
+
+
+
 function radixSort(array) {
-  // code goes here
+  //find longest number
+  const longest = getLongestNumber(array);
+  //create how many bukcets you need
+
+  //an array of arrays
+  const buckets = new Array(10).fill().map(() => []);
+
+  for (let i = longest - 1; i >= 0; i--) {
+    while (array.length) {
+      const current = array.shift()
+
+      //enqueuing 10 arrays
+      buckets[getDigit(current, i, longest)].push(current)
+    }
+
+    //dequeue
+    for (let j = 0; j < 10; j++) {
+      while (buckets[j].length) {
+        //take off front of buckets, pushing into array
+        array.push(buckets[j].shift())
+      }
+    }
+  }
+
+  return array;
 }
 
 // unit tests
 // do not modify the below code
-describe.skip("radix sort", function () {
+describe("radix sort", function () {
   it("should sort correctly", () => {
     const nums = [
       20,
