@@ -28,7 +28,7 @@ class ArrayList {
     this.length++;
   }
 
-  pop(value) {
+  pop() {
     const last = this.array[this.length - 1];
     delete this.array[this.length - 1];
     this.length--;
