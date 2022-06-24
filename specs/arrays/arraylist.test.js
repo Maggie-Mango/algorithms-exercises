@@ -19,46 +19,41 @@
 
 class ArrayList {
   constructor() {
-    this.array = {};
     this.length = 0;
+    this.data = {};
   }
 
-  push(value) {
-    this.array[this.length] = value;
+  push(value){
+    this.data[this.length] = value;
     this.length++;
   }
 
-  pop() {
-    const last = this.array[this.length - 1];
-    delete this.array[this.length - 1];
+  pop(){
+    const last = this.data[this.length - 1];
+    delete this.data[this.length - 1];
     this.length--;
     return last;
   }
 
-  get(index) {
-    return this.array[index]
+  get(index){
+    //returns item from array
+    return this.data[index]
   }
 
-  delete(index) {
-    const del = this.array[index]
-    //shift the data
-    this._shift(index)
-    return del
-
+  delete(index){
+    //removes item from array
+    const element = this.data[index];
+    this._collapse(index)
+    return element;
   }
-  _shift(index) {
+
+  _collapse(index) {
     for (let i = index; i < this.length; i++) {
-      this.array[i] = this.array[i + 1];
+      this.data[i] = this.data[i + 1];
     }
-    delete this.array[this.length - 1];
+    delete this.data[this.length - 1]
     this.length--;
   }
-
-
-  serialize() {
-    return this.array;
-  }
-
 
 }
 
