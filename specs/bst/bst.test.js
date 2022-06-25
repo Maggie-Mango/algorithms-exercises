@@ -2,7 +2,7 @@
 
 Binary Search Tree!
 
-Name your class Tree. 
+Name your class Tree.
 
 I'd suggest making another class called Node. You don't have to; you can make them all plain JS objects
 
@@ -17,7 +17,62 @@ right - Node/object - the right node which itself may be another tree
 */
 
 class Tree {
-  // code goes here
+  constructor(){
+    this.root = null;
+  }
+
+  add(value) {
+    //logic around if this is the root
+    if (this.root === null) {
+      this.root = new Node(value);
+    } else {
+      let current = this.root;
+      while(true) {
+        if (current.value > value) {
+          //go left
+
+          if(current.left) {
+            current = current.left
+          } else {
+            current.left = new Node(value);
+            break;
+          }
+        } else {
+          //go right
+          if (current.right) {
+            current = current.right;;
+          } else {
+            current.right = new Node(value);
+            break;
+          }
+        }
+      }
+    }
+    //return the tree itself
+    return this;
+
+  }
+
+  toObject() {
+    return this.root;
+  }
+
+}
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+  /*
+  serialize() {
+    const ans = { value: this.value };
+    ans.left = this.left === null ? null : this.left.serialize();
+    ans.right = this.right === null ? null : this.right.serialize();
+    return ans;
+  }
+  */
 }
 
 // you might consider using a Node class too
@@ -27,7 +82,7 @@ class Tree {
 
 // unit tests
 // do not modify the below code
-describe.skip("Binary Search Tree", function () {
+describe("Binary Search Tree", function () {
   it("creates a correct tree", () => {
     const nums = [3, 7, 4, 6, 5, 1, 10, 2, 9, 8];
     const tree = new Tree();
